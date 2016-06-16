@@ -1,0 +1,104 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
+#define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
+#define s(n)                        scanf("%d",&n)
+#define p(n)			    printf("%d\n",n)
+#define sl(n)                       scanf("%lld",&n)
+#define pl(n)			    printf("%lld\n",n)
+#define ll long long int
+int main()
+{
+    int t;
+    s(t);
+    while(t--)
+    {
+
+    }
+return 0;
+}
+
+"Failure is the fog through which we glimpse triumph."
+Hi!
+This is Divyesh, a student of Delhi Technological University, a very well known institute in India.
+I'm currently doing B.Tech From IT, 3rd year. I love programming and have apt knowledge of C, C++ and data structures along with basic HTML, CSS and Javascript knowledge. I would like you to consider my application for 2 months internship in Gurgaon. I'm hardworking, patient and would love to work in your company and learn new stuff in the coming 2 months.
+Thanks!
+5967017401516
+https://docs.google.com/forms/d/12uEXtwHpQJMC1FKne6wp1j96bR0D7_LIEsZZVE4F724/formResponse
+
+
+
+#include<bits/stdc++.h>
+const int  MOD= 10e9+7;
+using namespace std;
+static int mod = 10e9+7;
+#define ll long long
+int main()
+{
+    ll N;
+    cin>>N;
+
+    ll a[N+1];
+    memset(a,0,N+1);
+    a[0]=0;
+    for(ll i=1;i<=N;i++)
+        cin>>a[i];
+
+    ll Q;
+    cin>>Q;
+    for(ll i=0;i<Q;i++)
+    {
+        ll k;
+        cin>>k;
+
+        if(k==2)
+        {
+         ll R;
+         cin>>R;
+         ll ans=a[1];
+         double t=log10(a[1]);
+
+         int index = (ll)(N-1)/R;
+
+         int left =1;int right=1+index*R;
+         while(left<=right)
+         {
+             if(left==right)
+             {
+             	ans =(ans %MOD * a[left]%MOD)%MOD;
+             	t+=log10(a[left]);
+             	break;
+             }
+             ans = ((ans%MOD * ((a[left]%MOD*a[right]%MOD)%MOD)%MOD)%MOD)%MOD;
+              t +=log10(left)+log10(right);
+             left+=R;
+             right-=R;
+             
+         }
+         /*
+         for(int i=1;i<=N;i++)
+         {
+            if(1+R*i>N)
+                break;
+            ans = (ans%mod * a[1+R*i]%mod)%mod;
+           
+         }*/
+
+        //cout<<t<<" "<<endl;
+
+
+        // double k = floor(pow(10,t));
+
+         double y = (pow(10,t-int(t)));
+        string varAsString = std::to_string(y);
+       // cout<<varAsString;
+        // cout<<round(y)<<endl;
+
+         cout<<varAsString[0]<<" "<<ans<<endl;
+        }else{
+            ll aa,bb;
+            cin>>aa>>bb;
+            a[aa]=bb;
+        }
+    }
+}
