@@ -8,17 +8,22 @@ using namespace std;
 #define sl(n)                       scanf("%lld",&n)
 #define pl(n)               printf("%lld\n",n)
 #define ll long long int
-string reverse(string s){
-	if(s.length()==0||s.length()==1){
+string remdup(string s){
+	int n=s.length();
+	if(n==0||n<=1)
 		return s;
+	else if(s[0]==s[1])
+		return remdup(s.substr(1,n));
+	else {
+            string s1=s.substr(1,n);
+            return s[0]+remdup(s1);
 	}
-	else return reverse(s.substr(1,s.length()))+s.substr(0,1);
 }
 int main()
 {
 	string s;
 	cin>>s;
-	cout<<reverse(s)<<endl;
+	cout<<remdup(s)<<endl;
 	getch();
 	return 0;
 }
