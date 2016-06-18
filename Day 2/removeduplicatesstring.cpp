@@ -14,10 +14,7 @@ string remdup(string s){
 		return s;
 	else if(s[0]==s[1])
 		return remdup(s.substr(1,n));
-	else {
-            string s1=s.substr(1,n);
-            return s[0]+remdup(s1);
-	}
+	else return s[0]+remdup(s.substr(1,n));
 }
 int main()
 {
