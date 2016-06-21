@@ -1,29 +1,5 @@
-/*
-Question
-1
-You are given with a NxN matrix which contains only 0s and 1s. e.g.
-1 0 1 1 0
-0 1 1 1 0
-1 1 1 1 1
-1 0 1 1 1
-1 1 1 1 1
-Your job is to write a function which will set every row that contains a 0 to all 0s and set every
-column that contains a 0 to all 0s. The output for the above input matrix will be:
-0 0 0 0 0
-0 0 0 0 0
-0 0 1 1 0
-0 0 0 0 0
-0 0 1 1 0
-Fucntion
-Prototype:
-Int[][] ZeroPass(int[][] inputMatrix)
-*/
-
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
-#include<vector>
-#include<conio.h>
-#include<cstdio>
 #define print(arr,n) for(int i =0;i<n;i++) cout<< arr[i] << " "
 
 vector<vector<int> > ZeroPass(vector<vector<int> > matrix)
@@ -80,12 +56,8 @@ vector<vector<int> > ZeroPass(vector<vector<int> > matrix)
 int main()
 {
 	int n,m;
-	cout<<"Enter the row size of input matrix : ";
 	cin>> n;
-	cout<<"Enter the column size of input matrix : ";
 	cin>> m;
-
-	cout<<"Enter the matrix : \n" ;
 	vector<vector<int> > arr;
 	for(int i =0;i<n;i++)
 	{	
@@ -98,11 +70,8 @@ int main()
 
 		}
 		arr.push_back(row);
-	}
-
-	arr = ZeroPass(arr);
-
-	cout<<"The required matrix is : " << endl;
+	
+}	arr = ZeroPass(arr);
 	for(int i =0;i<n;i++)
 		{
 			for(int z =0;z<m;z++)
