@@ -1,30 +1,38 @@
 #include <bits/stdc++.h>
 #include <conio.h>
 using namespace std;
-#define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
-#define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
-#define s(n)                        scanf("%d",&n)
-#define p(n)			    printf("%d\n",n)
-#define sl(n)                       scanf("%lld",&n)
-#define pl(n)			    printf("%lld\n",n)
-#define ll long long int
-string reverse(string s){
-	string s1;
-	string k="";
-	int n=s.length();
-	f(i,0,n){
-		while(s[i]=""){
-			s1[i]=s[i];
-		}
+
+void reverse(char  *str ,  int start , int end )
+{
+   char ch;
+   int j = end;
+   for(int i =start;i<=(start+end)/2;i++)
+   	{	ch = str[i];	
+   		str[i] = str[j-i+start];
+   		str[j-i+start] = ch;
+   } 
+}
+void reversewithoutwords(char *str , int n)
+{
+
+	reverse(str,0,n-1);
+	int j =0 , i;
+	for( i = 0 ; i<n;i++)
+	{ 
+		if(str[i]!=' ' && str[i]!='\0') 
+			continue;
+		reverse(str,j,i-1);
+		j = i+1;
 	}
-	k=" "+s1;
-	return k;
+	reverse(str,j,i-1);
 }
 int main()
 {
-    string s;
-    cin>>s;
-    cout<<reverse(s)<<endl;
-    getch();
-return 0;
+	char  str[50];
+	cout<<"Enter the string : " ;
+	gets(str);
+	reversewithoutwords(str,strlen(str));
+	cout<<" The Modified string is : " << str << endl;
+	getch();
+	return 0;
 }
