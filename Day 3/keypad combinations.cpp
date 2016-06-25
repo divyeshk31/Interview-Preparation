@@ -8,7 +8,7 @@ string getlastdigit(int n)
 
 	switch(n)
 	{
-	case 1 : str = ""; return str;
+	case 1 : str = " "; return str;
 	case 2: str = "abc"; return str;
 	case 3: str = "def"; return str;
 	case 4: str = "ghi"; return str;
@@ -28,9 +28,9 @@ void printallcombination(int n , string str)
 			return ;
 		}
  string lastdigitoption = getlastdigit(n%10);
- for(int i =0;i<lastdigitoption.size();i++)
- 	printallcombination(n/10,lastdigitoption.at(i)+str);
- return ;
+ for(int i=0;i<lastdigitoption.size();i++)
+ 	printallcombination(n/10,lastdigitoption[i]+str);
+ return;
 }
 
 int main()

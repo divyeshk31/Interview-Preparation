@@ -17,3 +17,4 @@ int main() {
     myfunction1(x); cout << x << endl;
     myfunction2(ptr); cout << x << endl;
 }
+// 20 21 21

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 using namespace std;
 int main()
 {
@@ -8,5 +9,7 @@ int main()
     } while(c--);
 
     cout << no;
+    getch();
     return 0;
 }
+//runtime

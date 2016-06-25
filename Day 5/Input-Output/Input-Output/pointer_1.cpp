@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 char * getCharacterArray() {
     char p[] = "CODING NINJAS";
@@ -8,3 +8,4 @@ int main() {
     cout << getCharacterArray();
     return 0;
 }
+// NULL
