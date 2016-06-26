@@ -1,14 +1,16 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+//#include <conio.h>
 using namespace std;
 
 template <typename T>
 class Node {
 	public:
-		T data;
+		T val;
 		Node* next;
 
-		Node(T data) {
-			this->data = data;
+		Node(T val) {
+			this->val = val;
 			next = NULL;
 		}
 
@@ -40,7 +42,7 @@ Node<int>* takeLLInput() {
 
 void print(Node<int>* head) {
 	while (head != NULL) {
-		cout << head->data << " ";
+		cout << head->val << " ";
 		head = head->next;
 	}
 	cout << -1 << endl;
@@ -51,32 +53,36 @@ int length(Node<int>* head) {
 		return 0;
 	return 1 + length(head->next);
 }
-
-Node<int>* getNthNode(Node<int>* head, int n) {
-	for (int i = 0; i < n;  i++) {
-		head = head->next;
+Node<int>* revk(Node<int>* A,int k){
+	Node<int>* cur=A;
+	Node<int>* prev=NULL;
+	Node<int>* next=NULL;
+	int c=0;
+	if(!A){
+		return NULL;
 	}
-	return head;
-}
-
-void merge(Node<int>* head) {
-	int llLength = length(head);
-	Node<int>* midNode = getNthNode(head, (llLength + 1)/2 - 1);
-	Node<int>* second = midNode->next;
-	midNode->next = NULL;
-	Node<int>* first = head;
-	while(first != NULL && second != NULL) {
-		Node<int>* temp = second->next;
-		second->next = first->next;
-		first->next = second;
-		first = second->next;
-		second = temp;
+	int m=length(A);
+	if(m<k){
+		return A;
 	}
+	while(cur!=NULL&&c<k){
+		next=cur->next;
+		cur->next=prev;
+		prev=cur;
+		cur=next;
+		c++;
+	}
+	if(next!=NULL)
+		A->next=revk(next,k);
+	return prev;
 }
-
 int main() {
+	int k;
+	cin>>k;
 	Node<int>* head = takeLLInput();
-	merge(&head);
+	head=revk(head,k);
 	print(head);
 	delete head;
+  //getch();
+
 }

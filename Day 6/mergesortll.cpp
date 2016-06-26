@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <conio.h>
+//#include <conio.h>
 using namespace std;
 
 template <typename T>
@@ -100,6 +100,6 @@ int main() {
 	mergeS(&head);
 	print(head);
 	delete head;
-	getch();
-	return 0;
+//	getch();
+//	return 0;
 }
