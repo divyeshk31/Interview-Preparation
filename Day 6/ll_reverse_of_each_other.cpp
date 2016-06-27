@@ -1,6 +1,4 @@
-	
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
 template <typename T>
@@ -54,14 +52,11 @@ int length(Node<int>* head) {
 		return 0;
 	return 1 + length(head->next);
 }
-
-Node<int>* getNthNode(Node<int>* head, int n) {
-	for (int i = 0; i < n;  i++) {
-		head = head->next;
-	}
-	return head;
+void swap(Node<int>* a, Node<int>* b){
+	int temp=a->data;
+	a->data=b->data;
+	b->data=temp;
 }
-
 Node<int>* reverse(Node<int>* head) {
 	if (head == NULL || head->next == NULL) {
 		return head;
@@ -72,25 +67,20 @@ Node<int>* reverse(Node<int>* head) {
 	head->next = NULL;
 	return smallerLLHead;
 }
-
-void merge(Node<int>* head) {
-	int llLength = length(head);
-	Node<int>* midNode = getNthNode(head, (llLength + 1)/2 - 1);
-	Node<int>* second = midNode->next;
-	midNode->next = NULL;
-	Node<int>* first = head;
-	while(first != NULL && second != NULL) {
-		Node<int>* temp = second->next;
-		second->next = first->next;
-		first->next = second;
-		first = second->next;
-		second = temp;
-	}
+int identical(Node<int> *a, Node<int> *b){
+	 if (a == NULL && b == NULL)
+       return true;
+	 if (a != NULL && b != NULL)
+       return (a->data == b->data) &&
+              identical(a->next, b->next);
+    return 0;
 }
-
 int main() {
-	Node<int>* head = takeLLInput();
-	head = reverse(head);
-	print(head);
-	delete head;
+	Node<int>* start1= takeLLInput();
+	Node<int>* start2= takeLLInput();
+	start1=reverse(start1);
+	int ans=identical(start1,start2);
+	cout<<ans<<endl;
+	delete start1;
+	delete start2;
 }
