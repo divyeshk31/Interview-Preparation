@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <map>
 using namespace std;
 #define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
 #define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
@@ -8,30 +7,30 @@ using namespace std;
 #define sl(n)                       scanf("%lld",&n)
 #define pl(n)			    printf("%lld\n",n)
 #define ll long long int
-int longestsubs(int a[], int n){
-	map<int,int> mymap;
-	f(i,0,n)
-	mymap[a[i]]++;
-	int c=0;
-	int s=0;
-	f(i,0,n){
-		if(mymap.find(a[i]-1)==mymap.end()){
-			int j=a[i];
-			while(mymap.find(j)!=mymap.end())
-				j++;
-		c=max(c,j-a[i]);
-			}
-		}
-	return c;
+void calculateSpan(int a[], int n, int ans[])
+{
+   stack<int> st;
+   st.push(0);
+  ans[0] = 1;
+   f(i,1,n)
+   {
+      while (!st.empty() && a[st.top()] <= a[i])
+         st.pop();
+      ans[i] = (st.empty())? (i + 1) : (i - st.top());
+      st.push(i);
+   }
 }
+
 int main()
 {
     int n;
-    cin>>n;
+    s(n);
+    int ans[n+1];
     int a[n+2];
     f(i,0,n)
-    cin>>a[i];
-    cout<<longestsubs(a,n)<<endl;
-    //getch();
-return 0;
+    s(a[i]);
+    calculateSpan(a,n,ans);
+    f(i,0,n)
+    cout<<ans[i]<<" ";
+    return 0;
 }

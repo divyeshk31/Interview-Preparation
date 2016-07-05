@@ -1,5 +1,5 @@
-
 #include <bits/stdc++.h>
+#include <conio.h>
 using namespace std;
 
 template <typename T>
@@ -60,7 +60,7 @@ void swap(Node<int>* a, Node<int>* b){
 }
 
 void sort012(Node<int>* head){
-    int c[3]={0,0,0};
+    int c[3]={0};
     Node<int> * cur=head;
     while(cur!=NULL){
         c[cur->data]+=1;
@@ -78,10 +78,42 @@ void sort012(Node<int>* head){
     }
   }
 }
-
+void sortList(Node<int>*head)
+{
+   Node<int>*curr=head;
+    int i=0,j=0,k=0;
+ 
+    while(curr)
+    {
+        if(curr->data==0) i++;
+        else if(curr->data==1) j++;
+        else k++;
+        curr=curr->next;
+    }
+    curr=head;
+    while(i)
+    {
+        curr->data=0;
+        curr=curr->next;
+        i--;
+    }
+    while(j)
+    {
+        curr->data=1;
+        curr=curr->next;
+        j--;
+    }
+    while(k)
+    {
+        curr->data=2;
+        curr=curr->next;
+        k--;
+    }
+}
 int main() {
         Node<int>* start= takeLLInput();
         sort012(start);
         print(start);
         delete start;
+        getch();
 }

@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <map>
+#include <conio.h>
 using namespace std;
 #define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
 #define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
@@ -8,30 +8,35 @@ using namespace std;
 #define sl(n)                       scanf("%lld",&n)
 #define pl(n)			    printf("%lld\n",n)
 #define ll long long int
-int longestsubs(int a[], int n){
-	map<int,int> mymap;
-	f(i,0,n)
-	mymap[a[i]]++;
-	int c=0;
-	int s=0;
-	f(i,0,n){
-		if(mymap.find(a[i]-1)==mymap.end()){
-			int j=a[i];
-			while(mymap.find(j)!=mymap.end())
-				j++;
-		c=max(c,j-a[i]);
-			}
-		}
-	return c;
+int platform(int a[], int b[], int n){
+	sort(a,a+n); sort(b,b+n);
+	int i=1,j=0;
+	int need=1, ans=1;
+	while(i<n && j<n){
+		if(a[i]<b[j]){
+			need++;
+			i++;
+		if(need>ans)
+			ans=need;
+	}
+	else{
+		need--;
+		j++;
+	}
+}
+return ans;
 }
 int main()
 {
     int n;
-    cin>>n;
-    int a[n+2];
+    s(n);
+    int a[n+2],b[n+2];
     f(i,0,n)
-    cin>>a[i];
-    cout<<longestsubs(a,n)<<endl;
-    //getch();
+    s(a[i]);
+    f(i,0,n)
+    s(b[i]);
+    int ans=platform(a,b,n);
+    p(ans);
+    getch();
 return 0;
 }

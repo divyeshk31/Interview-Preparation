@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <conio.h>
+//#include <conio.h>
 using namespace std;
 #define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
 #define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
@@ -43,16 +43,13 @@ bool ishigh(string s){
 }
 int main()
 {
-	int t;
-	cin>>t;
-	while(t--){
+	
     string s;
     cin>>s;
     if(ishigh(s)){
-    	cout<<"Yes\n";
+    	cout<<"1\n";
     }
-    else cout<<"No\n";
-    getch();
-}
+    else cout<<"0\n";
+    //getch();
 return 0;
 }
