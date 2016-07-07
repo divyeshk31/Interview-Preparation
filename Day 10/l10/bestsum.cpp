@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int findMax(BinaryTreeNode<int>* root, bool caninclude = true) {
+int findMax(BinaryTreeNode<int>* root, bool caninclude ) {
 	if (root == NULL)
 		return 0;
 
