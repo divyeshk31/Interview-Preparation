@@ -46,21 +46,21 @@ node* takeInputLWise(){
     return root;
 }
 
-node * remleaf(node *root){
-    if(!root) {
-        cout<<-1<<endl;
-        return NULL;
-    }
-    if(root->left==NULL && root->right==NULL){
-        free(root);
-        return NULL;
-    }
-        root->left=remleaf(root->left);
-        root->right=remleaf(root->right);
-    
-    return root;
+node * build(int in[], int post[], int inStart, int inEnd,int postend){
+    if(inStart>inEnd) return NULL;
+    node *newNode = getnewnode(post[postend]);
+    int mid;
+            for (int i=inStart;i<=inEnd;i++){
+                if (in[i]==newNode->data)
+                    {
+                        mid = i;
+                        break;
+                    }
+            }
+    newNode->right=build(in,post,mid+1,inEnd,postend-1);
+    newNode->left=build(in,post,inStart,mid-1,postend-1-inEnd+mid);
+    return newNode;
 }
-
 int height(node* root) {
     if (root == NULL)
         return 0;
@@ -86,16 +86,27 @@ void printLevelOrder(node* root)
     int h = height(root);
     int i;
     for (i=1; i<=h; i++)
-        {printGivenLevel(root, i);
-    cout<<endl;
-}
+   {
+     printGivenLevel(root, i);
+     cout<<endl;
+    }
 }
 
 int main()
 {
-    node *root = takeInputLWise();
-    root = remleaf(root);
+    int n;
+    cin>>n;
+    int post[n],in[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin>>post[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cin>>in[i];
+    }
+    node* root=build(in, post, 0 ,n-1,n-1);
     printLevelOrder(root);
-  //getch();
+   //getch();
     return 0;
 }

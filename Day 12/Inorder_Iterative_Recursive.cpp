@@ -1,10 +1,12 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 #include <stdlib.h>
 #include <stdio.h>
-//#include <conio.h>
+#include <conio.h>
 
 using namespace std;
+
 struct node{
     int data;
     node *left;
@@ -46,21 +48,30 @@ node* takeInputLWise(){
     return root;
 }
 
-node * remleaf(node *root){
-    if(!root) {
-        cout<<-1<<endl;
-        return NULL;
-    }
-    if(root->left==NULL && root->right==NULL){
-        free(root);
-        return NULL;
-    }
-        root->left=remleaf(root->left);
-        root->right=remleaf(root->right);
-    
-    return root;
+void recinorder(node *root){
+    if(!root) return;
+    recinorder(root->left);
+    cout<<root->data<<" ";
+    recinorder(root->right);
 }
 
+void iteinorder(node * root){
+    stack<node*> s;
+    s.push(root);
+    while(!s.empty()){
+        node *t = s.top();
+        if(t->left){
+            s.push(t->left);
+            t->left=NULL;
+    }
+    else{
+        cout<<t->data<<" ";
+        s.pop();
+       if(t->right)
+       s.push(t->right);
+        }
+    }  
+}
 int height(node* root) {
     if (root == NULL)
         return 0;
@@ -94,8 +105,9 @@ void printLevelOrder(node* root)
 int main()
 {
     node *root = takeInputLWise();
-    root = remleaf(root);
-    printLevelOrder(root);
-  //getch();
+    //recinorder(root);
+    iteinorder(root);
+    //printLevelOrder(root);
+    getch();
     return 0;
 }

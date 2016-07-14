@@ -1,5 +1,5 @@
-#include<bits/stdc++.h>
-#include<conio.h>
+#include <bits/stdc++.h>
+#include <conio.h>
 using namespace std;
 #define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
 #define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)

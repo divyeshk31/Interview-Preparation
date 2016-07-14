@@ -32,7 +32,7 @@ int main()
 	cout<<"Enter the string : " ;
 	gets(str);
 	reversewithoutwords(str,strlen(str));
-	cout<<" The Modified string is : " << str << endl;
+	cout<<"The Modified string is : " << str << endl;
 	getch();
 	return 0;
 }

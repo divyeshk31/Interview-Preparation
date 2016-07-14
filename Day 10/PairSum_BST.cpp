@@ -2,6 +2,7 @@
 #include <queue>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stack>
 //#include <conio.h>
 
 using namespace std;
@@ -46,56 +47,49 @@ node* takeInputLWise(){
     return root;
 }
 
-node * remleaf(node *root){
-    if(!root) {
-        cout<<-1<<endl;
-        return NULL;
+bool pairsum(node *root, int x){
+    stack<node*> s1,s2;
+    node * c1=root, *c2=root;
+    while(true){
+        while(c1){
+            s1.push(c1);
+            c1=c1->left;
+        }
+        while(c2){
+            s2.push(c2);
+            c2=c2->right;
+        }
+        if(!s1.empty()&&!s2.empty()){
+            c1=s1.top();
+            c2=s2.top();
+            if(c1->data>=c2->data)
+                return false;
+            if(c1->data+c2->data==x){
+                cout<<c1->data<<" "<<c2->data;
+                return true;
+            }
+            if(c1->data+c2->data>x){
+                c1=NULL;
+                s2.pop();
+                c2=c2->left;
+            }
+           else if(c1->data+c2->data<x){
+                c2=NULL;
+                s1.pop();
+                c1=c1->right;
+            }
+        }
+        else return false;
     }
-    if(root->left==NULL && root->right==NULL){
-        free(root);
-        return NULL;
-    }
-        root->left=remleaf(root->left);
-        root->right=remleaf(root->right);
-    
-    return root;
-}
-
-int height(node* root) {
-    if (root == NULL)
-        return 0;
-    return 1 + max(height(root->left), height(root->right));
-}
-
-void printGivenLevel(struct node* root, int level)
-{
-    if (root == NULL)
-        return;
-    if (level == 1)
-        printf("%d ", root->data);
-
-    else if (level > 1)
-    {
-        printGivenLevel(root->left, level-1);
-        printGivenLevel(root->right, level-1);
-    }
-}
-
-void printLevelOrder(node* root)
-{
-    int h = height(root);
-    int i;
-    for (i=1; i<=h; i++)
-        {printGivenLevel(root, i);
-    cout<<endl;
-}
 }
 
 int main()
 {
+    int sum;
+    cin>>sum;
     node *root = takeInputLWise();
-    root = remleaf(root);
-    printLevelOrder(root);
-  //getch();
+    if(pairsum(root,sum)==false)
+        cout<<"-1 -1"<<endl;
+    //getch();
     return 0;
 }

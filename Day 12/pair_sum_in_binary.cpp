@@ -1,8 +1,10 @@
 #include <iostream>
 #include <queue>
 #include <stdlib.h>
-#include <stdio.h>
+#include <stack>
+#include <vector>
 //#include <conio.h>
+#include <map>
 
 using namespace std;
 struct node{
@@ -18,6 +20,7 @@ node* getnewnode(int data)
     temp->right=NULL;
     return temp;
 }
+
 node* takeInputLWise(){
     int rootData;
     cin >> rootData;
@@ -46,56 +49,54 @@ node* takeInputLWise(){
     return root;
 }
 
-node * remleaf(node *root){
-    if(!root) {
-        cout<<-1<<endl;
-        return NULL;
-    }
-    if(root->left==NULL && root->right==NULL){
-        free(root);
-        return NULL;
-    }
-        root->left=remleaf(root->left);
-        root->right=remleaf(root->right);
-    
-    return root;
-}
 
-int height(node* root) {
-    if (root == NULL)
-        return 0;
-    return 1 + max(height(root->left), height(root->right));
-}
-
-void printGivenLevel(struct node* root, int level)
+void inorder(node *root, map<int ,int> &mymap)
 {
-    if (root == NULL)
-        return;
-    if (level == 1)
-        printf("%d ", root->data);
+    if(root==NULL)
+        return ;
+    inorder(root->left,mymap);
+    mymap[root->data]++;
+    inorder(root->right,mymap);
+}
 
-    else if (level > 1)
+void check_pair(node *root, map<int ,int> &mymap,int k,int &flag)
+{
+    if(root==NULL || flag==1)
+        return ;
+    check_pair(root->left,mymap,k,flag);
+    int val = k - root->data;
+    if(mymap.count(val)==1 && val!=root->data)
     {
-        printGivenLevel(root->left, level-1);
-        printGivenLevel(root->right, level-1);
+        flag = 1;
+        return;
     }
+    check_pair(root->right,mymap,k,flag);
 }
 
-void printLevelOrder(node* root)
+void find_pair(node *root,int k)
 {
-    int h = height(root);
-    int i;
-    for (i=1; i<=h; i++)
-        {printGivenLevel(root, i);
-    cout<<endl;
-}
+    map<int,int> mymap;
+    inorder(root, mymap);
+    int flag=0;
+    check_pair(root,mymap,k,flag);
+    if(flag==0)
+    {
+        cout<<"0";
+    }
+    else
+    {
+        cout<<"1";
+    }
 }
 
 int main()
 {
+    int k;
+    cin>>k;
     node *root = takeInputLWise();
-    root = remleaf(root);
-    printLevelOrder(root);
-  //getch();
+    find_pair(root,k);
+    //getch();
     return 0;
 }
+
+

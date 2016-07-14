@@ -2,7 +2,9 @@
 #include <queue>
 #include <stdlib.h>
 #include <stdio.h>
-//#include <conio.h>
+#include <stack>
+#include <map>
+#include <conio.h>
 
 using namespace std;
 struct node{
@@ -46,56 +48,39 @@ node* takeInputLWise(){
     return root;
 }
 
-node * remleaf(node *root){
-    if(!root) {
-        cout<<-1<<endl;
-        return NULL;
-    }
-    if(root->left==NULL && root->right==NULL){
-        free(root);
-        return NULL;
-    }
-        root->left=remleaf(root->left);
-        root->right=remleaf(root->right);
-    
-    return root;
-}
-
-int height(node* root) {
-    if (root == NULL)
-        return 0;
-    return 1 + max(height(root->left), height(root->right));
-}
-
-void printGivenLevel(struct node* root, int level)
+void vertical_traversal(node *root,int hd,map<int,vector<int> > &hmap)//hd->horizontal distance
 {
-    if (root == NULL)
-        return;
-    if (level == 1)
-        printf("%d ", root->data);
-
-    else if (level > 1)
+    if(root==NULL)return;
+    hmap[hd].push_back(root->data);
+    vertical_traversal(root->left,hd-1,hmap);
+    vertical_traversal(root->right,hd+1,hmap);
+ 
+}
+ 
+ 
+void print_vertical_traversal(node *root)//to carry out vertical order traversal of a binary tree
+{
+    map<int,vector<int> > hmap;
+    vertical_traversal(root,0,hmap);
+    map<int,vector<int> >::iterator i;
+    vector<int>::iterator v;
+    int sum=0;
+    for(i=hmap.begin();i!=hmap.end();i++)
     {
-        printGivenLevel(root->left, level-1);
-        printGivenLevel(root->right, level-1);
+      sum=0;
+        for( v=i->second.begin();v!=i->second.end();v++)
+        {
+            sum+=(*v);
+        }
+        cout<<sum<<" ";
     }
 }
 
-void printLevelOrder(node* root)
-{
-    int h = height(root);
-    int i;
-    for (i=1; i<=h; i++)
-        {printGivenLevel(root, i);
-    cout<<endl;
-}
-}
 
 int main()
 {
     node *root = takeInputLWise();
-    root = remleaf(root);
-    printLevelOrder(root);
-  //getch();
-    return 0;
+     print_vertical_traversal(root);
+  getch();
+  return 0;
 }

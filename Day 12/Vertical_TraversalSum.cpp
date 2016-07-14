@@ -2,10 +2,11 @@
 #include <queue>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stack>
+#include <map>
 #include <conio.h>
 
 using namespace std;
-
 struct node{
     int data;
     node *left;
@@ -46,69 +47,65 @@ node* takeInputLWise(){
     }
     return root;
 }
-void sumtree(node *root){
+
+void verticalsum(node *root,int count[],int index,int leftwidth)
+{
     if(root==NULL)
-        return;
-
-    else if(root->left!=NULL && root->right!=NULL)
-    {
-        root->data = root->left->data + root->right->data;
-    }
-
-    else if(root->left==NULL && root->right!=NULL)
-    {
-        root->data = root->right->data;
-    }
-
-    else if(root->left!=NULL && root->right==NULL)
-    {
-        root->data = root->left->data;
-    }
-    else{
-
-        root->data = 0;
-    }
-
-    sumtree(root->left);
-    sumtree(root->right);
+        return ;
+    verticalsum(root->left,count,index-1,leftwidth);
+    count[index+leftwidth]+=root->data;
+    verticalsum(root->right,count,index+1,leftwidth);
 }
+
 int height(node* root) {
     if (root == NULL)
         return 0;
     return 1 + max(height(root->left), height(root->right));
 }
-
-void printGivenLevel(struct node* root, int level)
+/* Get width of a given level */
+int getWidth(node* root, int level)
 {
-    if (root == NULL)
-        return;
-    if (level == 1)
-        printf("%d ", root->data);
 
-    else if (level > 1)
-    {
-        printGivenLevel(root->left, level-1);
-        printGivenLevel(root->right, level-1);
-    }
+  if(root == NULL)
+    return 0;
+
+  if(level == 1)
+    return 1;
+
+  else if (level > 1)
+    return getWidth(root->left, level-1) +
+             getWidth(root->right, level-1);
 }
-
-void printLevelOrder(node* root)
+int getMaxWidth(node* root)
 {
-    int h = height(root);
-    int i;
-    for (i=1; i<=h; i++){
-    {
-            printGivenLevel(root, i);
-            cout<<endl;
-    }
-}
+  int maxWidth = 0;
+  int width;
+  int h = height(root);
+  int i;
+
+  /* Get width of each level and compare
+     the width with maximum width so far */
+  for(i=1; i<=h; i++)
+  {
+    width = getWidth(root, i);
+    if(width > maxWidth)
+      maxWidth = width;
+  }
+
+  return maxWidth;
 }
 
 int main()
 {
     node *root = takeInputLWise();
-   sumtree(root);
-     printLevelOrder(root);
-    getch();
-    return 0;
+     int i,width=getMaxWidth(root);
+    int leftwidth=getMaxWidth(root->left);
+  int count[width+1];
+  for(i=0;i<=width;i++)
+    count[i]=0;
+  verticalsum(root,count,0,leftwidth);
+  for(i=0;i<=width;i++)
+    printf("%d ",count[i]);
+  getch();
+  return 0;
 }
