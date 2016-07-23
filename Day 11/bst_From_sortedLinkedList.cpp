@@ -125,9 +125,10 @@ void printLevelOrder(node* root)
     int h = height(root);
     int i;
     for (i=1; i<=h; i++)
-        {printGivenLevel(root, i);
-    cout<<endl;
-}
+    {
+        printGivenLevel(root, i);
+        cout<<endl;
+    }
 }
 
 int main()

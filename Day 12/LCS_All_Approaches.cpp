@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <conio.h>
+//#include <conio.h>
 using namespace std;
-#define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
+#define f(i,a,b) for(int i=(int)(a);i<=(int)(b);i++)
 #define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
 #define s(n)                        scanf("%d",&n)
 #define p(n)			    printf("%d\n",n)
@@ -10,12 +10,16 @@ using namespace std;
 #define ll long long int
 int LCS_DP(char *s, char *t,int m, int n){
 	int LCS[m+1][n+1];
-	for(int i=0;i<=m;i++){
-		for (int j=0;j<=n;j++)
+	f(i,0,m){
+		LCS[i][0]=0;
+	}
+	f(j,0,n){
+		LCS[0][j]=0;
+	}
+	for(int i=1;i<=m;i++){
+		for (int j=1;j<=n;j++)
 		{
-			if(i==0||j==0)
-				LCS[i][j]=0;
-			else if(s[i-1]==t[j-1])
+		 if(s[i-1]==t[j-1])
 			LCS[i][j]=LCS[i-1][j-1]+1;
 			else LCS[i][j]=max(LCS[i-1][j],LCS[i][j-1]);
 		}
@@ -35,10 +39,10 @@ int main()
     cin>>s>>t;
     int m=strlen(s);
 	int n=strlen(t);
-    int ans=LCS_Recursive(s,t,m,n);
+    //int ans=LCS_Recursive(s,t,m,n);
     int div=LCS_DP(s,t,m,n);
-    cout<<ans<<endl;
+   // cout<<ans<<endl;
     cout<<div<<endl;
-    getch();
+    //getch();
 return 0;
 }

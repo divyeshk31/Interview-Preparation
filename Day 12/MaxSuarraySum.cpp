@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <conio.h>
+//#include <conio.h>
 using namespace std;
 int MaxSubarray(int a[], int n){
 	int maxhere=a[0];
@@ -22,6 +22,6 @@ int main()
 	}
 	int ans = MaxSubarray(a,n);
 	cout<<ans<<endl;
-	getch();
+	//getch();
 	return 0;
 }
