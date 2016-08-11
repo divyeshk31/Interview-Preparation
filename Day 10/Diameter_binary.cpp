@@ -1,8 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <stdlib.h>
-//#include <conio.h>
-//#include <conio.h>
+#include <conio.h>
 using namespace std;
 struct node{
     int data;
@@ -85,6 +84,6 @@ int main()
     int ans =diameter(root);
     cout<<ans<<endl;
     //print(root);
-    //getch();
+    getch();
     return 0;
 }
