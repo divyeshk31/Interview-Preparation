@@ -6,7 +6,6 @@
 
 using namespace std;
 
-// you may add more methods here
 struct node{
     int data;
     node *left, *right;
@@ -31,10 +30,7 @@ int maxLeafSum(node* root, int &res){
     return max(ls, rs) + root->data;
 }
 
-int maxDiameterSum(int nodes, int tree[511]) {
-    //add code to this function to solve the problem
-    //don't write code in this editor
-    //your code will not be saved across submissions
+int maxDiameterSum(int nodes, int tree[511]){
     node* root, *newt;
     vector<node*> node_list;
     int i=0;

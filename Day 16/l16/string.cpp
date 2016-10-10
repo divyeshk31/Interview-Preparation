@@ -8,18 +8,25 @@ using namespace std;
 #define sl(n)                       scanf("%lld",&n)
 #define pl(n)			    printf("%lld\n",n)
 #define ll long long int
-int rev(string a, string b){
-    int n=a.length();
-    int m=b.length();
-	if(n==1&&m==1){
-		return 1;
+void concat(string a, string b){
+	int n=a.length();
+	int m=b.length();
+	string c="";
+	int i,j,k=0;
+	f(i,0,n){
+		c[i]=a[i];
+		k=i;
 	}
-    if(n!=m){
-        return 0;
-    }
-	if(a[0]==b[m-1]){
-		return rev(a.substr(1,n),b.substr(0,m-1));
+	k++;
+	f(j,0,m){
+		c[k+j]=b[j];
 	}
+//	c[n+m]='\0';
+	i=0;
+	for(i=0;i<n+m;i++)
+		cout<<c[i];
+
+	cout<<"\n";
 }
 int main()
 {
@@ -27,12 +34,12 @@ int main()
     s(t);
     while(t--)
     {
-    	string a,b;
-    	cin>>a>>b;
-    	if(rev(a,b)==1)
-    		cout<<"Yes\n";
-    	else cout<<"No\n";
+  		string a,b;
+  		cin>>a>>b;
+  		concat(a,b);
+  		//cout<<c<<endl;
     	getch();
     }
+
 return 0;
 }

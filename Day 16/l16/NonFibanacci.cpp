@@ -8,31 +8,32 @@ using namespace std;
 #define sl(n)                       scanf("%lld",&n)
 #define pl(n)			    printf("%lld\n",n)
 #define ll long long int
-int rev(string a, string b){
-    int n=a.length();
-    int m=b.length();
-	if(n==1&&m==1){
-		return 1;
+
+int nonfib(int n)
+{
+	int a=1,b=2,c=3;
+	while(n>0)
+	{
+		a=b;
+		b=c;
+		c=a+b;
+		n-=(c-b-1);
 	}
-    if(n!=m){
-        return 0;
-    }
-	if(a[0]==b[m-1]){
-		return rev(a.substr(1,n),b.substr(0,m-1));
-	}
+	n+=(c-b-1);
+	return b+n;
 }
+
 int main()
 {
     int t;
     s(t);
     while(t--)
     {
-    	string a,b;
-    	cin>>a>>b;
-    	if(rev(a,b)==1)
-    		cout<<"Yes\n";
-    	else cout<<"No\n";
-    	getch();
+  		int n;
+  		s(n);
+  		int ans=nonfib(n);
+  		p(ans);
     }
-return 0;
+    getch();
+    return 0;
 }

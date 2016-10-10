@@ -14,7 +14,7 @@ public:
         for(int i=k;i<n;i++){
             ans.push_back(a[q.front()]);
             while(!q.empty() && a[i]>=a[q.back()])
-            q.pop_back();
+            q.pop_back(); wQ    Z v
             if(!q.empty() && q.front()<=i-k)
             q.pop_front();
             q.push_back(i);

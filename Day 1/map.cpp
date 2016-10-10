@@ -46,7 +46,6 @@ void findSubArray(int arr[], int n)
 	cout << max_len << endl;
 }
 
-/* Driver program to test above functions*/
 int main()
 {
 	int arr[] = {1, 1, 1, 1, 1, 1 ,1, 0 ,0, 0 ,0, 1, 1 ,1 ,1, 1 ,1};
