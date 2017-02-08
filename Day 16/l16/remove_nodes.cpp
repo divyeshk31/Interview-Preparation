@@ -57,7 +57,7 @@ bool isScrable(string s1, string s2) {
 
 	int length = s1.size()/2;
 	bool option1 = 
-		isScramble(s1.substr(0,length), s2.substr(0.length)) &&
+		isScramble(s1.substr(0,length), s2.substr(0,length)) &&
 		isScrable(s1.substr(length), s2.substr(length));
 	bool option2 = 
 		isScramble(s1.substr(0,length), s2.substr(s1.size() - length))
